@@ -6,8 +6,12 @@ const PORT = process.env.PORT || 3000;
 const morgan = require("morgan")
 const methodOverride = require("method-override")
 const authRoutes = require("./controllers/auth")
+const foodsController = require("./controllers/foods")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")
+const isSignedIn = require('./middleware/is-signed-in.js');
+const passUserToView = require('./middleware/pass-user-to-view.js');
+
 
 // Middleware
 
@@ -36,8 +40,10 @@ app.get("/", (req, res) => {
     })
 })
 
-
+app.use(passUserToView);
 app.use("/auth", authRoutes)
+app.use(isSignedIn)
+app.use("/users/:userId/foods", foodsController)
 
 
 // Routes below require sign-in
