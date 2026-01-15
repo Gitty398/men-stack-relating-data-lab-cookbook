@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const morgan = require("morgan")
 const methodOverride = require("method-override")
+app.use(express.urlencoded({ extended: true }))
 const authRoutes = require("./controllers/auth")
 const foodsController = require("./controllers/foods")
 const session = require("express-session")
@@ -17,8 +18,8 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 
 require("./db/connection")
 app.use(morgan("tiny"))
+
 app.use(methodOverride("_method"))
-app.use(express.urlencoded({ extended: true }))
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -29,6 +30,11 @@ app.use(session({
 })
 );
 
+
+app.use((req, res, next) => {
+    console.log('REQ ->', req.method, req.originalUrl);
+    next();
+});
 
 // Routes
 

@@ -9,7 +9,34 @@
 
 <body>
     <%- include('../partials/_navbar.ejs') %>
-        <h1>Welcome to my Pantry</h1>
+
+        <h1>Welcome to My Pantry</h1>
+
+        <% if (foods.length===0 ) { %>
+            <h4>Please Click "Add a Food" to add your first food to the pantry</h4>
+            <% } %>
+
+                <p>
+                    <a href="/users/<%= user._id%>/foods/new">Add a New Food to the Pantry</a>
+                </p>
+
+                <ul>
+                    <% foods.forEach(food=> { %>
+                        <li>
+                            <%=food.name %> - <%= food.color %>
+
+                                    <form action="/users/<%= user._id %>/foods/<%= food._id %>?_method=DELETE"
+                                        method="POST">
+                                        <button type="submit">Delete Food</button>
+                                    </form>
+
+                                    <a href="/users/<%= user._id %>/foods/<%= food._id %>/edit">Edit this
+                                        food</a>
+                        </li>
+                        <% })%>
+                </ul>
+                </div>
+
 </body>
 
 </html>
