@@ -65,15 +65,6 @@ app.use((req, res, next) => {
 })
 
 
-app.get("/vip-lounge", (req, res) => {
-    if (req.session.user) {
-        res.send(`Welcome to the party ${req.session.user.username}`)
-    } else {
-        res.send("Sorry no guests allowed")
-    }
-})
-
-
 app.listen(PORT, () => {
     console.log("Running on", PORT)
 })

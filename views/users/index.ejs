@@ -17,9 +17,13 @@
             <% } else { %>
                 <ul>
                     <% users.forEach(user=> { %>
+
                         <li>
-                            <%= user.username %>
+                            <a href="/users/<%= user._id %>" title="<%= user.username%>">
+                                <%= user.username%>
+                            </a>
                         </li>
+
                         <% }) %>
                 </ul>
                 <% } %>

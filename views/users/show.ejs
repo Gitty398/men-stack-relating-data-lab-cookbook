@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%=user.username%>'s Pantry
+    </title>
+</head>
+
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+
+        <h2>
+            <%=user.username%>'s Pantry
+        </h2>
+        <ul>
+            <% user.foods.forEach(food=> { %>
+                <li>
+                    <%=food.name %> - <%= food.color %>
+                </li>
+                <% }) %>
+        </ul>
+
+</body>
+
+</html>
